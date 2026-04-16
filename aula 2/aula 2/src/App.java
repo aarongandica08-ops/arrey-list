@@ -1,3 +1,4 @@
+import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ public class App {
         Integer opcao = 0;
         while(opcao != 6){
             
-            System.out.println("Este é um CRUD de alunos! Digite 1 para cadastrar\nDigite 2 para mostrar"); 
+            System.out.println("Este é um CRUD de alunos! Digite 1 para cadastrar\nDigite 2 para mostrar\nDigite 3 para deletar\nDigite 4 para editar\nDigite 5 para filtrar por nome"); 
             opcao = sc.nextInt();
             switch (opcao) {
                 case 1:
@@ -31,6 +32,10 @@ public class App {
                     Integer id2 = sc.nextInt();
                     editar(id2);
                     break;
+                case 5:
+                    filtrarPorNome();
+                    break;
+
             }
         }
     }
@@ -92,6 +97,20 @@ public class App {
         if(opcao ==1){
             System.out.println("Digite o novo turma: ");
             aluno.setTurma(sc2.nextLine());
+        }
+    }
+
+    public static void filtrarPorNome(){
+        Scanner sc = new Scanner(System.in);
+        String nome;
+        System.out.println("Digite o nome a ser filtrado: ");
+        nome = sc.nextLine();
+        for(Aluno individuo : alunos){
+            if(individuo.getNome().contains(nome)){
+                System.out.println("Nome: "+individuo.getNome());
+                System.out.println("Turma: "+individuo.getTurma());
+                System.out.println("---------------------------------");
+            }
         }
     }
 }
